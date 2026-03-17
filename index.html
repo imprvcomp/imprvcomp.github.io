@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IMPRV — Deja de Sabotearte</title>
+<meta name="description" content="El sistema de 30 días para dejar de procrastinar y construir el estilo de vida que siempre quisiste.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── RESET ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+/* ── VARIABLES ─────────────────────────────────────────────── */
+:root {
+  --bg:       #080810;
+  --bg2:      #10101f;
+  --bg3:      #18182e;
+  --violet:   #8b5cf6;
+  --vio2:     #a78bfa;
+  --vio-dark: #4c1d95;
+  --vio-pale: #1e1040;
+  --white:    #f8f7ff;
+  --white2:   #c4c0e8;
+  --muted:    #6b6890;
+  --gold:     #fbbf24;
+  --green:    #34d399;
+  --red:      #f87171;
+  --border:   #2d2b50;
+  --fhead:    'Syne', sans-serif;
+  --fbody:    'Space Grotesk', sans-serif;
+  --radius:   14px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--white2);
+  font-family: var(--fbody);
+  font-size: 16px;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+/* ── NAVBAR ─────────────────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(8,8,16,0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 32px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.nav-logo-icon {
+  width: 36px; height: 36px;
+  background: var(--vio-pale);
+  border: 1px solid var(--violet);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+}
+.nav-logo-icon svg { width: 22px; height: 22px; }
+.nav-brand {
+  font-family: var(--fhead);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.02em;
+}
+.nav-cta {
+  background: var(--violet);
+  color: #fff;
+  font-family: var(--fbody);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: none;
+  cursor: pointer;
+}
+.nav-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(139,92,246,0.5);
+}
+
+/* ── HERO ───────────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 100px 24px 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(139,92,246,0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(139,92,246,0.15) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+.hero-content { position: relative; z-index: 1; max-width: 860px; }
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--vio-pale);
+  border: 1px solid var(--violet);
+  border-radius: 100px;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--vio2);
+  margin-bottom: 32px;
+  letter-spacing: 0.04em;
+}
+.hero-badge-dot {
+  width: 8px; height: 8px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: pulse 2s ease infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.5; transform: scale(1.3); }
+}
+
+.hero h1 {
+  font-family: var(--fhead);
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+.hero h1 span {
+  color: transparent;
+  background: linear-gradient(135deg, var(--violet), var(--vio2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  display: block;
+}
+.hero-sub {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: var(--white2);
+  max-width: 600px;
+  margin: 0 auto 16px;
+  line-height: 1.7;
+}
+.hero-hook {
+  font-size: 15px;
+  color: var(--red);
+  font-weight: 600;
+  margin-bottom: 40px;
+}
+
+.hero-cta-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #6d28d9, #8b5cf6, #a78bfa);
+  background-size: 200%;
+  animation: btnShift 4s ease infinite;
+  color: #fff;
+  font-family: var(--fhead);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 20px 48px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 50px rgba(139,92,246,0.5);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 0 80px rgba(139,92,246,0.7);
+}
+@keyframes btnShift {
+  0%,100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+.btn-arrow { font-size: 1.3rem; }
+
+.hero-guarantee {
+  font-size: 13px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.hero-guarantee span { color: var(--green); font-weight: 600; }
+
+/* ── STATS BAR ─────────────────────────────────────────────── */
+.stats-bar {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 32px 24px;
+}
+.stats-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  text-align: center;
+}
+.stat-num {
+  font-family: var(--fhead);
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: var(--violet);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* ── GOLD STRIP ─────────────────────────────────────────────── */
+.gold-strip {
+  background: var(--gold);
+  padding: 16px 24px;
+  text-align: center;
+  font-family: var(--fbody);
+  font-weight: 700;
+  font-size: 15px;
+  color: #1a0a00;
+  letter-spacing: 0.01em;
+}
+
+/* ── SECTIONS ───────────────────────────────────────────────── */
+section { padding: 96px 24px; }
+.section-inner { max-width: 960px; margin: 0 auto; }
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--violet);
+  margin-bottom: 14px;
+}
+.section-title {
+  font-family: var(--fhead);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+.section-sub {
+  font-size: 17px;
+  color: var(--white2);
+  max-width: 640px;
+  line-height: 1.7;
+}
+
+/* ── PROBLEMA ───────────────────────────────────────────────── */
+.problema { background: var(--bg); }
+.problema-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 48px;
+}
+.problema-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.problema-card:hover {
+  border-color: var(--red);
+  transform: translateY(-4px);
+}
+.problema-icon {
+  font-size: 2rem;
+  margin-bottom: 14px;
+  display: block;
+}
+.problema-card h3 {
+  font-family: var(--fhead);
+  font-size: 1.1rem;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.problema-card p { font-size: 14px; color: var(--muted); }
+
+/* ── SOLUCION / SEMANAS ──────────────────────────────────────── */
+.solucion { background: var(--bg2); }
+.semanas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 48px;
+}
+.semana-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  text-align: center;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.semana-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--violet), var(--vio2));
+}
+.semana-card:hover {
+  border-color: var(--violet);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(139,92,246,0.2);
+}
+.semana-num {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--violet);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.semana-icon { font-size: 2.4rem; margin-bottom: 12px; display: block; }
+.semana-card h3 {
+  font-family: var(--fhead);
+  font-size: 1.15rem;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.semana-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* BONUS */
+.bonus-card {
+  background: linear-gradient(135deg, #1c1400, #2a1f00);
+  border: 2px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 32px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.bonus-icon { font-size: 3rem; flex-shrink: 0; }
+.bonus-card h3 {
+  font-family: var(--fhead);
+  color: var(--gold);
+  font-size: 1.2rem;
+  margin-bottom: 6px;
+}
+.bonus-card p { font-size: 14px; color: var(--white2); }
+
+/* ── PARA QUIEN ──────────────────────────────────────────────── */
+.paraquien { background: var(--bg); }
+.checks-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+  margin-top: 40px;
+}
+.check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+.check-icon {
+  width: 32px; height: 32px;
+  background: rgba(52,211,153,0.1);
+  border: 1px solid var(--green);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+  color: var(--green);
+  font-weight: 700;
+}
+.check-item p { font-size: 14px; color: var(--white2); line-height: 1.5; }
+
+/* ── QUOTE ───────────────────────────────────────────────────── */
+.quote-section { background: var(--vio-pale); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.quote-text {
+  font-family: var(--fhead);
+  font-size: clamp(1.5rem, 4vw, 2.8rem);
+  color: var(--white);
+  text-align: center;
+  line-height: 1.3;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.quote-text em {
+  color: var(--vio2);
+  font-style: normal;
+}
+.quote-author {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ── CTA FINAL ───────────────────────────────────────────────── */
+.cta-section {
+  background: var(--bg2);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(139,92,246,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-content { position: relative; z-index: 1; }
+.cta-price {
+  font-family: var(--fhead);
+  font-size: 4rem;
+  font-weight: 800;
+  color: var(--violet);
+  margin: 24px 0 8px;
+}
+.cta-price-note {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 36px;
+}
+.trust-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+.trust-badge {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 8px 16px;
+  font-size: 13px;
+  color: var(--white2);
+  font-weight: 500;
+}
+.trust-badge-icon { font-size: 16px; }
+
+/* ── FOOTER ──────────────────────────────────────────────────── */
+footer {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  padding: 40px 24px;
+  text-align: center;
+}
+footer p { font-size: 13px; color: var(--muted); }
+footer .footer-brand {
+  font-family: var(--fhead);
+  font-size: 1.5rem;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+
+/* ── ANIMATIONS ─────────────────────────────────────────────── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── MOBILE ──────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+  .hero h1 { font-size: 3rem; }
+  .btn-primary { padding: 18px 32px; font-size: 1rem; }
+  .bonus-card { flex-direction: column; }
+  nav { padding: 0 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="14" width="4" height="7" rx="1" fill="#8b5cf6"/>
+        <rect x="8" y="10" width="4" height="11" rx="1" fill="#8b5cf6"/>
+        <rect x="14" y="6" width="4" height="15" rx="1" fill="#8b5cf6"/>
+        <path d="M3 18 L20 4" stroke="#a78bfa" stroke-width="2" stroke-linecap="round"/>
+        <path d="M16 4 L20 4 L20 8" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <span class="nav-brand">IMPRV</span>
+  </a>
+  <a href="#comprar" class="nav-cta">Quiero empezar →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-dots"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      Sistema de productividad real — sin motivación falsa
+    </div>
+    <h1>
+      Deja de
+      <span>Sabotearte</span>
+    </h1>
+    <p class="hero-sub">
+      El sistema de 30 días para vencer la procrastinación y construir el estilo de vida que siempre quisiste. Sin fuerza de voluntad. Sin rutinas imposibles.
+    </p>
+    <p class="hero-hook">
+      "Mañana empiezo" — lo dijiste 100 veces. Hoy es diferente.
+    </p>
+    <div class="hero-cta-group">
+      <a href="#comprar" class="btn-primary">
+        Quiero empezar hoy
+        <span class="btn-arrow">→</span>
+      </a>
+      <p class="hero-guarantee">
+        <span>✓ Descarga instantánea</span>&nbsp;·&nbsp;PDF en español&nbsp;·&nbsp;Acceso de por vida
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- GOLD STRIP -->
+<div class="gold-strip">
+  ⚡ El 92% de las personas abandona sus metas antes de la semana 3. Este libro está diseñado para que seas del 8%.
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="fade-in">
+      <div class="stat-num">30</div>
+      <div class="stat-label">Días de programa</div>
+    </div>
+    <div class="fade-in">
+      <div class="stat-num">4</div>
+      <div class="stat-label">Semanas estructuradas</div>
+    </div>
+    <div class="fade-in">
+      <div class="stat-num">1</div>
+      <div class="stat-label">Hábito a la vez</div>
+    </div>
+    <div class="fade-in">
+      <div class="stat-num">0</div>
+      <div class="stat-label">Excusas necesarias</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEMA -->
+<section class="problema">
+  <div class="section-inner">
+    <p class="section-label fade-in">¿Te identificás?</p>
+    <h2 class="section-title fade-in">Tu cerebro te está saboteando.<br>Y no es tu culpa.</h2>
+    <p class="section-sub fade-in">La procrastinación no es pereza. Es una respuesta neurológica al dolor. Tu cerebro evita el malestar presente a costa de tu futuro.</p>
+    <div class="problema-grid">
+      <div class="problema-card fade-in">
+        <span class="problema-icon">😩</span>
+        <h3>"Mañana arranco"</h3>
+        <p>Llevás semanas, meses, años postergando lo que sabés que tenés que hacer.</p>
+      </div>
+      <div class="problema-card fade-in">
+        <span class="problema-icon">📱</span>
+        <h3>El scroll infinito</h3>
+        <p>Abrís Instagram "5 minutos" y cuando te das cuenta pasó una hora.</p>
+      </div>
+      <div class="problema-card fade-in">
+        <span class="problema-icon">😤</span>
+        <h3>La culpa constante</h3>
+        <p>Sabés lo que tenés que hacer pero no podés arrancar. Y eso te destruye por dentro.</p>
+      </div>
+      <div class="problema-card fade-in">
+        <span class="problema-icon">🔄</span>
+        <h3>El loop sin salida</h3>
+        <p>Motivación → arrancar → abandonar → culpa → motivación. Una y otra vez.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUCION -->
+<section class="solucion">
+  <div class="section-inner">
+    <p class="section-label fade-in">El programa</p>
+    <h2 class="section-title fade-in">30 días. 4 semanas.<br>Un sistema que funciona.</h2>
+    <p class="section-sub fade-in">No es motivación. Es un sistema diseñado para funcionar incluso cuando no tenés ganas.</p>
+    <div class="semanas-grid" style="margin-top:48px">
+      <div class="semana-card fade-in">
+        <div class="semana-num">Semana 1</div>
+        <span class="semana-icon">🧠</span>
+        <h3>Diagnóstico</h3>
+        <p>Entendés por qué procrastinás y cuál es tu patrón exacto.</p>
+      </div>
+      <div class="semana-card fade-in">
+        <div class="semana-num">Semana 2</div>
+        <span class="semana-icon">⚡</span>
+        <h3>Rutina Mínima</h3>
+        <p>Construís una rutina tan simple que es imposible no cumplirla.</p>
+      </div>
+      <div class="semana-card fade-in">
+        <div class="semana-num">Semana 3</div>
+        <span class="semana-icon">🎯</span>
+        <h3>Deep Work</h3>
+        <p>Aprendés a trabajar con foco real. 2 horas que valen 8.</p>
+      </div>
+      <div class="semana-card fade-in">
+        <div class="semana-num">Semana 4</div>
+        <span class="semana-icon">🔥</span>
+        <h3>Identidad</h3>
+        <p>Dejás de "intentar cambiar" y empezás a ser la persona que querés ser.</p>
+      </div>
+    </div>
+    <div class="bonus-card fade-in">
+      <span class="bonus-icon">⭐</span>
+      <div>
+        <h3>BONUS — Tracker de 30 días imprimible</h3>
+        <p>Tu herramienta de seguimiento visual. Marcás cada día completado. El progreso visible cambia todo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUIEN -->
+<section class="paraquien">
+  <div class="section-inner">
+    <p class="section-label fade-in">Para quién es esto</p>
+    <h2 class="section-title fade-in">Este eBook es para vos si...</h2>
+    <div class="checks-list">
+      <div class="check-item fade-in">
+        <div class="check-icon">✓</div>
+        <p>Sabés lo que tenés que hacer pero no podés arrancar</p>
+      </div>
+      <div class="check-item fade-in">
+        <div class="check-icon">✓</div>
+        <p>Ya probaste mil técnicas y ninguna duró más de una semana</p>
+      </div>
+      <div class="check-item fade-in">
+        <div class="check-icon">✓</div>
+        <p>Sentís que el tiempo se te va y no avanzás hacia donde querés</p>
+      </div>
+      <div class="check-item fade-in">
+        <div class="check-icon">✓</div>
+        <p>Querés un sistema real, no motivación que dura 3 días</p>
+      </div>
+      <div class="check-item fade-in">
+        <div class="check-icon">✓</div>
+        <p>Estás dispuesto a invertir 30 días para cambiar los próximos años</p>
+      </div>
+      <div class="check-item fade-in">
+        <div class="check-icon">✓</div>
+        <p>Querés sentirte orgulloso de tu día — todos los días</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-section">
+  <div class="section-inner" style="padding: 72px 0;">
+    <p class="quote-text fade-in">
+      "No te falta motivación.<br>Te falta un sistema que <em>no dependa de ella.</em>"
+    </p>
+    <p class="quote-author fade-in">— IMPRV</p>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-section" id="comprar">
+  <div class="section-inner cta-content">
+    <p class="section-label fade-in">Conseguilo ahora</p>
+    <h2 class="section-title fade-in">Empezá hoy.<br>No mañana.</h2>
+    <p class="section-sub fade-in" style="margin: 0 auto;">
+      Descargás el PDF en segundos y tenés acceso de por vida. Sin suscripciones, sin vencimientos.
+    </p>
+    <div class="fade-in" style="display:flex;align-items:center;justify-content:center;gap:16px;margin:24px 0 4px;flex-wrap:wrap;">
+      <span style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--muted);text-decoration:line-through;opacity:0.6;">$12 USD</span>
+      <div class="cta-price" style="margin:0;">$7 USD</div>
+      <span style="background:#f87171;color:#fff;font-size:12px;font-weight:700;padding:6px 12px;border-radius:100px;letter-spacing:0.06em;">-59% OFF</span>
+    </div>
+    <p class="cta-price-note fade-in" style="color:var(--gold);font-weight:600;font-size:15px;">⚡ Precio de lanzamiento — por tiempo limitado</p>
+    <div class="fade-in" style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:16px 24px;margin:12px auto 28px;max-width:400px;">
+      <p style="font-size:12px;color:var(--muted);margin-bottom:8px;letter-spacing:0.06em;font-weight:600;">LA OFERTA TERMINA EN</p>
+      <div style="display:flex;justify-content:center;gap:12px;">
+        <div style="text-align:center;">
+          <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--violet);" id="cd-h">23</div>
+          <div style="font-size:11px;color:var(--muted);">HORAS</div>
+        </div>
+        <div style="font-family:'Syne',sans-serif;font-size:2rem;color:var(--border);padding-top:2px;">:</div>
+        <div style="text-align:center;">
+          <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--violet);" id="cd-m">59</div>
+          <div style="font-size:11px;color:var(--muted);">MINUTOS</div>
+        </div>
+        <div style="font-family:'Syne',sans-serif;font-size:2rem;color:var(--border);padding-top:2px;">:</div>
+        <div style="text-align:center;">
+          <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--violet);" id="cd-s">00</div>
+          <div style="font-size:11px;color:var(--muted);">SEGUNDOS</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⚠️ REEMPLAZÁ ESTA URL POR TU LINK DE TIENDA NUBE -->
+    <a href="https://imprv.mitiendanube.com/productos/imprv-deja-de-sabotearte/" class="btn-primary fade-in" style="display:inline-flex;">
+      Quiero empezar hoy
+      <span class="btn-arrow">→</span>
+    </a>
+
+    <div class="trust-badges fade-in">
+      <div class="trust-badge"><span class="trust-badge-icon">📥</span> Descarga instantánea</div>
+      <div class="trust-badge"><span class="trust-badge-icon">📄</span> PDF en español</div>
+      <div class="trust-badge"><span class="trust-badge-icon">🔒</span> Pago seguro</div>
+      <div class="trust-badge"><span class="trust-badge-icon">♾️</span> Acceso de por vida</div>
+      <div class="trust-badge"><span class="trust-badge-icon">✅</span> Mercado Pago</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-brand">IMPRV</p>
+  <p>improve every day · imprv.co · @theIMPRV</p>
+  <p style="margin-top:8px;">© 2026 IMPRV — Todos los derechos reservados</p>
+</footer>
+
+<script>
+// Fade in on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Smooth nav hide on scroll
+let lastY = 0;
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  nav.style.transform = y > lastY && y > 100 ? 'translateY(-100%)' : 'translateY(0)';
+  nav.style.transition = 'transform 0.3s ease';
+  lastY = y;
+});
+
+// Countdown timer — renueva cada 24h por 7 dias
+(function() {
+  var KEY_END   = 'imprv_cd_end';
+  var KEY_START = 'imprv_cd_start';
+  var DAY_MS    = 24 * 60 * 60 * 1000;
+  var MAX_DAYS  = 7;
+  var now       = Date.now();
+
+  var firstVisit = localStorage.getItem(KEY_START);
+  if (!firstVisit) {
+    localStorage.setItem(KEY_START, now);
+    firstVisit = now;
+  } else {
+    firstVisit = parseInt(firstVisit);
+  }
+
+  // Si pasaron mas de 7 dias, el countdown queda en 00:00:00
+  var daysSince = Math.floor((now - firstVisit) / DAY_MS);
+  if (daysSince >= MAX_DAYS) {
+    ['cd-h','cd-m','cd-s'].forEach(function(id){
+      var el = document.getElementById(id);
+      if (el) el.textContent = '00';
+    });
+    return;
+  }
+
+  // Calcular el fin del ciclo actual de 24h
+  var cycleStart = firstVisit + daysSince * DAY_MS;
+  var cycleEnd   = cycleStart + DAY_MS;
+
+  // Si el ciclo vencio, avanzar al siguiente
+  if (now >= cycleEnd) {
+    cycleStart = cycleEnd;
+    cycleEnd   = cycleStart + DAY_MS;
+  }
+
+  function update() {
+    var diff = Math.max(0, cycleEnd - Date.now());
+    // Si este ciclo termino, pasar al siguiente
+    if (diff === 0) {
+      cycleStart = cycleEnd;
+      cycleEnd   = cycleStart + DAY_MS;
+    }
+    var h = Math.floor(diff / 3600000);
+    var m = Math.floor((diff % 3600000) / 60000);
+    var s = Math.floor((diff % 60000) / 1000);
+    var fmt = function(n){ return n < 10 ? '0'+n : ''+n; };
+    var hEl = document.getElementById('cd-h');
+    var mEl = document.getElementById('cd-m');
+    var sEl = document.getElementById('cd-s');
+    if (hEl) hEl.textContent = fmt(h);
+    if (mEl) mEl.textContent = fmt(m);
+    if (sEl) sEl.textContent = fmt(s);
+  }
+  update();
+  setInterval(update, 1000);
+})();
+</script>
+
+</body>
+</html>
